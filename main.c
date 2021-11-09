@@ -19,7 +19,8 @@ int main(int argc, char **argv) {
   }
   int blackColor = BlackPixel(display, DefaultScreen(display));
   int whiteColor = WhitePixel(display, DefaultScreen(display));
-  Window w = XCreateSimpleWindow(display, DefaultRootWindow(display), 0, 0, 200, 200, 0, blackColor, blackColor);
+  Window w = XCreateSimpleWindow(display, DefaultRootWindow(display), 0, 0, 200,
+                                 200, 0, blackColor, blackColor);
   XSelectInput(display, w, StructureNotifyMask);
   XMapWindow(display, w);
   GC gc = XCreateGC(display, w, 0, NULL);
@@ -32,17 +33,29 @@ int main(int argc, char **argv) {
     }
   }
   // Draw the foreground box
-  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y);
-  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X, BOX_INIT_Y + BOX_HEIGHT);
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT);
-  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y + BOX_HEIGHT, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT);
+  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X + BOX_WIDTH,
+            BOX_INIT_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X,
+            BOX_INIT_Y + BOX_HEIGHT);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y,
+            BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT);
+  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y + BOX_HEIGHT,
+            BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT);
   // Draw the background box
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y);
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_BG_DIFF_Y, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_BG_DIFF_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_BG_DIFF_Y, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
   // Connect the foreground and background
-  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y);
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y);
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT, BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X, BOX_INIT_Y, BOX_INIT_X + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_BG_DIFF_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y,
+            BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X, BOX_INIT_Y + BOX_BG_DIFF_Y);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT,
+            BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
+            BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
   XFlush(display);
   sleep(10);
   return 0;
