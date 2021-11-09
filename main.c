@@ -10,6 +10,7 @@
 #define BOX_INIT_Y 65
 #define BOX_BG_DIFF_X 30
 #define BOX_BG_DIFF_Y (-30)
+#define X_MARK_DIFF 15
 
 int main(int argc, char **argv) {
   Display *display = XOpenDisplay(NULL);
@@ -56,6 +57,13 @@ int main(int argc, char **argv) {
   XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH, BOX_INIT_Y + BOX_HEIGHT,
             BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
             BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
+  // Draw an X on the front side
+  XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF, BOX_INIT_Y + X_MARK_DIFF,
+            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF,
+            BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF,
+            BOX_INIT_Y + X_MARK_DIFF, BOX_INIT_X + X_MARK_DIFF,
+            BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
   XFlush(display);
   sleep(10);
   return 0;
