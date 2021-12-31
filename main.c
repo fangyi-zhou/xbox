@@ -2,6 +2,7 @@
 // https://tronche.com/gui/x/xlib-tutorial/2nd-program-anatomy.html
 
 #include <X11/Xlib.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -68,6 +69,22 @@ int main(int argc, char **argv) {
             BOX_INIT_Y + X_MARK_DIFF, BOX_INIT_X + X_MARK_DIFF,
             BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
   XFlush(display);
-  sleep(10);
+
+  bool windowOpen = true;
+
+  while (windowOpen) {
+    XEvent ev;
+    while (XPending(display) > 0) {
+      XNextEvent(display, &ev);
+      switch (ev.type) {
+      case DestroyNotify:
+        XDestroyWindowEvent *e = (XDestroyWindowEvent *)&ev;
+        if (e->window == w)
+          windowOpen = false;
+        break;
+      }
+    }
+  }
+  XDestroyWindow(display, w);
   return 0;
 }
