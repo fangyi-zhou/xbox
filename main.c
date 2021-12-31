@@ -3,6 +3,7 @@
 
 #include <X11/Xlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define BOX_WIDTH 100
 #define BOX_HEIGHT 100
@@ -13,6 +14,8 @@
 #define X_MARK_DIFF 15
 
 int main(int argc, char **argv) {
+  (void)argc;
+  (void)argv;
   Display *display = XOpenDisplay(NULL);
   if (!display) {
     perror("Cannot open display");
