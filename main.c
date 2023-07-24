@@ -27,6 +27,8 @@ int main(int argc, char **argv) {
   int whiteColor = WhitePixel(display, DefaultScreen(display));
   Window w = XCreateSimpleWindow(display, DefaultRootWindow(display), 0, 0, 200,
                                  200, 0, blackColor, blackColor);
+  Atom wm_delete = XInternAtom(display, "WM_DELETE_WINDOW", True);
+  XSetWMProtocols(display, w, &wm_delete, 1);
   XSelectInput(display, w, StructureNotifyMask);
   XMapWindow(display, w);
   GC gc = XCreateGC(display, w, 0, NULL);
@@ -92,14 +94,13 @@ int main(int argc, char **argv) {
     while (XPending(display) > 0) {
       XNextEvent(display, &ev);
       switch (ev.type) {
-      case DestroyNotify:
-        XDestroyWindowEvent *e = (XDestroyWindowEvent *)&ev;
-        if (e->window == w)
+      case ClientMessage:
+        XClientMessageEvent *e = (XClientMessageEvent *)&ev;
+        if (e->data.l[0] == wm_delete)
           windowOpen = false;
         break;
       }
     }
   }
-  XDestroyWindow(display, w);
   return 0;
 }
