@@ -13,6 +13,7 @@
 #define BOX_BG_DIFF_X 30
 #define BOX_BG_DIFF_Y (-30)
 #define X_MARK_DIFF 15
+#define X_MARK_XSHIFT 4
 
 int main(int argc, char **argv) {
   (void)argc;
@@ -62,8 +63,22 @@ int main(int argc, char **argv) {
             BOX_INIT_X + BOX_WIDTH + BOX_BG_DIFF_X,
             BOX_INIT_Y + BOX_HEIGHT + BOX_BG_DIFF_Y);
   // Draw an X on the front side
-  XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF, BOX_INIT_Y + X_MARK_DIFF,
-            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF,
+  // Add some hollow effect by shifting one of the stroke
+  XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF + X_MARK_XSHIFT,
+            BOX_INIT_Y + X_MARK_DIFF,
+            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF + X_MARK_XSHIFT,
+            BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
+  XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF - X_MARK_XSHIFT,
+            BOX_INIT_Y + X_MARK_DIFF,
+            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF - X_MARK_XSHIFT,
+            BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
+  XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF - X_MARK_XSHIFT,
+            BOX_INIT_Y + X_MARK_DIFF,
+            BOX_INIT_X + X_MARK_DIFF + X_MARK_XSHIFT,
+            BOX_INIT_Y + X_MARK_DIFF);
+  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF - X_MARK_XSHIFT,
+            BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF,
+            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF + X_MARK_XSHIFT,
             BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
   XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF,
             BOX_INIT_Y + X_MARK_DIFF, BOX_INIT_X + X_MARK_DIFF,

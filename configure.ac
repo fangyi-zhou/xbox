@@ -1,4 +1,4 @@
-AC_INIT([xbox], [0.1])
+AC_INIT([xbox], [0.2])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_PATH_XTRA
