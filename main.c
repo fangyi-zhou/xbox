@@ -75,10 +75,10 @@ int main(int argc, char **argv) {
             BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF - X_MARK_XSHIFT,
             BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
   XDrawLine(display, w, gc, BOX_INIT_X + X_MARK_DIFF - X_MARK_XSHIFT,
-            BOX_INIT_Y + X_MARK_DIFF,
-            BOX_INIT_X + X_MARK_DIFF + X_MARK_XSHIFT,
+            BOX_INIT_Y + X_MARK_DIFF, BOX_INIT_X + X_MARK_DIFF + X_MARK_XSHIFT,
             BOX_INIT_Y + X_MARK_DIFF);
-  XDrawLine(display, w, gc, BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF - X_MARK_XSHIFT,
+  XDrawLine(display, w, gc,
+            BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF - X_MARK_XSHIFT,
             BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF,
             BOX_INIT_X + BOX_WIDTH - X_MARK_DIFF + X_MARK_XSHIFT,
             BOX_INIT_Y + BOX_HEIGHT - X_MARK_DIFF);
